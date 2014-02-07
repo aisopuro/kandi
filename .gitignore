@@ -1,0 +1,5 @@
+pohjat/
+*.aux
+*.log
+*.out
+*.synctex.gz

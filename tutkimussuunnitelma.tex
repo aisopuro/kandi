@@ -1,0 +1,161 @@
+\documentclass[12pt,a4paper,finnish,oneside]{article}
+
+% Valitse 'input encoding':
+%\usepackage[latin1]{inputenc} % merkistökoodaus, jos ISO-LATIN-1:tä.
+\usepackage[utf8]{inputenc}   % merkistökoodaus, jos käytetään UTF8:a
+% Valitse 'output/font encoding':
+%\usepackage[T1]{fontenc}      % korjaa ääkkösten tavutusta, bittikarttana
+\usepackage{ae,aecompl}       % ed. lis. vektorigrafiikkana bittikartan sijasta
+% Kieli- ja tavutuspaketit:
+\usepackage[finnish]{babel}
+% Muita paketteja:
+% \usepackage{amsmath}   % matematiikkaa
+\usepackage{url}       % \url{...}
+\usepackage{hyperref}
+
+% Kappaleiden erottaminen ja sisennys
+\parskip 1ex
+\parindent 0pt
+\evensidemargin 0mm
+\oddsidemargin 0mm
+\textwidth 159.2mm
+\topmargin 0mm
+\headheight 0mm
+\headsep 0mm
+\textheight 246.2mm
+
+\pagestyle{plain}
+
+% ---------------------------------------------------------------------
+
+\begin{document}
+
+% Otsikkotiedot: muokkaa tähän omat tietosi
+
+\title{TIK.kand tutkimussuunnitelma:\\[5mm]
+WebGL Pelinkehittäjän Näkökulmasta}
+
+\author{Atte Isopuro\\
+Aalto-yliopisto\\
+\url{atte.isopuro@aalto.fi}}
+
+\date{\today}
+
+\maketitle
+
+% ---------------------------------------------------------------------
+
+% MUOKKAA TÄHÄN. Jos tarvitset tähän viitteitä, käytä
+% tässä dokumentissa numeroviitejärjestelmää komennolla \cite{kahva}.
+%
+% Paljon kandidaatintöitä ohjanneen Vesa Hirvisalon tarjoama 
+% sabluuna. Kursivoidut osat \emph{...} ovat kurssin henkilökunnan
+% lisäämiä. 
+
+\textbf{Kandidaatintyön nimi:} WebGL Pelinkehittäjän Näkökulmasta
+
+\textbf{Työn tekijä:} Atte Kaspar Isopuro
+
+\textbf{Ohjaaja:} Jukka Nurminen
+
+
+\section{Tiivistelmä tutkimuksesta}
+
+Tutkimuksen tarkoituksena on tarkastella WebGL-rajapintaa HTML5-pelinkehittäjän näkökulmasta.
+
+\section{Tavoitteet ja näkökulmat}
+
+Aihetta tutkitaan pelikehittäjän näkökulmasta. Onko WebGL riitävän tehokas verrattuna natiivisti toteutettuun grafiikan piirtämiseen? Asettaako teknologian käyttö rajoituksia pelien toteutukselle?
+
+\section{Tutkimusmateriaali}
+
+Tutkimus perustuu kirjallisuuskatsastukseen. Katsastuksessa keskitytään tieteellisiin artikkeleihin jotka tutkivat WebGL:n suorituskykyä sekä sen käyttöä interaktiivisen grafiikan piirtämisessä. Tulosten perusteella pyritään pääsemään johtopäätökseen WebGL:n erityispiirteistä HTML5-pelinkehityksessä.
+
+WebGL-teknologiasta on tehty paljon eri alojen tutkimuksia: sisällön riittävyyttä pohditaan enemmän kohdassa~\hyperlink{sec:haasteet}{\ref{sec:haasteet}: Haasteet}.
+
+\section{Tutkimusmenetelmät}
+
+Aluksi rajataan aineisto WebGL:ää käsitteleviin tieteellisiin julkaisuihin. Alustava kriteeri on että tekstillä on jotain konkreettista sanottavaa WebGL:stä tai sen avulla toteutetuista tekniikoista.
+
+Tämän jälkeen viitteiden kelpoisuutta tutkitaan tarkistamalla julkaisutietokannoista josko ne viittaavat luotettavaan materiaaliin sekä kuinka usein niihin itseensä on viitattu. Tärkeimpinä työkaluina Scopus ja Google Scholar.
+
+Lopuksi aineisto luetaan huolellisemmin läpi ja kirjataan muistiin sellaiset viitteet jotka ovat tämän tutkimuksen kannalta relevantteja. Tieto, johon viitataan, kirjataan muistiin. Näistä muistiinpanoista koostettava tieto jäsennetään lopulta tarkoituksenmukaiseksi kokonaisuudeksi.
+
+\section{Haasteet}
+\label{sec:haasteet}
+\hypertarget{sec:haasteet}{Haasteet}
+
+Työn suurin haaste on mahdollinen sisällön riittämättömyys. Viitteitä on paljon, mutta selvästi aiheeseen sopivia ei ole kovin montaa. WebGL:ää on tutkittu paljon muihin tieteenaloihin liittyen: on mahdollista että eteenpäin mennessä sisältö osoittautuu riittämättömäksi. Silloin työn aihetta saattaa joutua laajentamaan jotta saadaan aikaiseksi hyväksyttävä lopputulos.
+
+\section{Resurssit}
+
+Työtä tekee alekirjoittanut, Aalto-Yliopiston opiskelija Atte Isopuro. Aikaa on käytettävissä vaadittava määrä.
+
+Työtä ohjaa Professori Jukka Nurminen.
+
+\section{Aikataulu}
+
+\begin{tabular}{|p{10mm}|p{30mm}|p{110mm}|}
+\hline
+Vk	&	Raportointi					&	Tehtävää	\\ \hline
+7	&	Kandidaatintyö v. 0.1		&	Tutkimus: 8h, Kirjoitus: 8h \\ \hline
+8	&	Ei mitään					&	Kielipalaute: 0.3h, Tutkimus: 8h, Kirjoitus: 8h \\ \hline
+9	&	Kandidaatintyö v. 0.2		&	Tutkimus: 4h, Kirjoitus: 12h  \\ \hline
+10	&	Ei mitään					&	Tutkimus: 4h, Kirjoitus: 12h  \\ \hline
+11	&	V2-opponointi				&	Opponointi: 8h, Tutkimus: 4h, Kirjoitus: 12h  \\ \hline
+12	&	Kandidaatintyö v. 1.0		&	Kirjoitus: 16h  \\ \hline
+13	&	Ei mitään					&	Kirjoitus: 16h  \\ \hline
+14	&	Yhteenveto (Ruotsi)			&	Yhteenveto: 8h, Kirjoitus: 16h  \\ \hline
+15	&	Ei mitään					&	Kirjoitus: 16h  \\ \hline
+16	&	Valmis, kalvot				&	Kalvot: 2h, Kirjoitus: 16h  \\ \hline
+
+\end{tabular}
+
+
+\section{Esittäminen}
+
+Työllä on alustavasti seuraavanlainen rakenne:
+
+\begin{enumerate}
+	\item{Johdanto}
+	\item{Taustaa}
+	\begin{enumerate}
+		\item{HTML5}
+		\item{Intensiivinen grafiikka}
+	\end{enumerate}
+	\item{WebGL:n soveltuvuus pelinkehitykseen}
+	\begin{enumerate}
+		\item{WebGL:n tarjoamat edut}
+		\item{Pelinkehittäjän tarpeet}
+	\end{enumerate}
+	\item{Tutkimusmenetelmät
+	\begin{enumerate}
+		\item{Lähteiden löytäminen}
+		\item{Luotettavuuden arviointi}
+	\end{enumerate}
+	\item{Tutkimustiedon arviointi}
+	\item{Johtopäätökset}
+\end{enumerate}
+%
+
+% ---------------------------------------------------------------------
+%
+% ÄLÄ MUUTA MITÄÄN TÄÄLTÄ LOPUSTA
+
+% Tässä on käytetty siis numeroviittausjärjestelmää. 
+% Toinen hyvin yleinen malli on nimi-vuosi-viittaus.
+
+% \bibliographystyle{plainnat}
+\bibliographystyle{finplain}  % suomi
+%\bibliographystyle{plain}    % englanti
+% Lisää mm. http://amath.colorado.edu/documentation/LaTeX/reference/faq/bibstyles.pdf
+
+% Muutetaan otsikko "Kirjallisuutta" -> "Lähteet"
+\renewcommand{\refname}{Lähteet}  % article-tyyppisen
+
+% Määritä bib-tiedoston nimi tähän (eli lahteet.bib ilman bib)
+\bibliography{lahteet}
+
+% ---------------------------------------------------------------------
+
+\end{document}
