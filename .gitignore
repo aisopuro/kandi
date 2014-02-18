@@ -1,5 +1,4 @@
-pohjat/
-*.aux
-*.log
-*.out
-*.synctex.gz
+*
+!kandi_*
+!main.tex
+!main.pdf
