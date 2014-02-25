@@ -1,0 +1,20 @@
+\section{Tutkimusmateriaali}
+\label{sec:materiaali}
+\hyperlink{index}{Takaisin sisällysluetteloon}
+\subsection{Suorituskyky}
+Selkein WebGL:n tarjoama etu on suorituskyky: mahdollisuus suorittaa laskentaa näytönohjaimessa suorittimen sijasta on huomattavasti nopeampaa: Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia\cite{hoetzlein}. WebGL pärjää myös yllättävän hyvin natiivia toteutusta vastaan. C++-pohjainen yksinkertainen OpenGL-sovellus on WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus\cite{hoetzlein}. Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
+
+Pelinkehittäjän kannattaa siis ottaa huomioon että WebGL on huomattavasti hitaampi kuin optimoitu natiivi sovellus, mikä oli odotettavissa. Huomionarvoisempaa on kuitenkin että WebGL ei itse ole pääsyyllinen kyseiseen eroon: WebGL-koodin optimoiminen ei merkittävästi vaikuttanut piirtonopeuteen\cite{hoetzlein}. On huomionarvoista että WebGL-grafiikan optimoimisessa ei välttämättä kannata keskittyä itse WebGL-koodiin: JavaScript-koodin optimoiminen voi tuottaa paljon suuremmat hyödyt. Näin ollen JavaScript-kokemus voi kompensoida puutteita kehittäjän WebGL-kokemuksessa, mikä saattaa huomattavasti helpottaa teknologian käyttöönottoa pelinkehittäjien keskuudessa.
+
+\subsection{Kirjaston kattavuus}
+Pelinkehittäjän on aina hyvä tietää mihin valittu teknologia pystyy ja mitä puutteita sillä on. Näin ollen on aiheellista katsastaa WebGL:n funktiokirjastoa, jossa on muutamia puutteita\cite{dibenedettoSpider}:
+
+WebGL on matalan tason kirjasto joka oletusarvoisesti toimii sekä tietokoneilla että mobiililaitteilla. Tästä syystä siitä saattaa puuttua toiminallisuutta joka löytyy oletusarvona suuremmista kirjastoista.
+Yksi tärkeä ominaisuus nykyaikaisissa grafiikkakirjastoissa on asynkroninen lataaminen. Kuvaa piirrettäessä tietokoneen on haettava muistista erinäistä tietoa: tekstuureita, malleja ym. Jos tällaiset tiedot pitää ladata yksi kerrallaan ohjelma saattaa lakata reagoimasta käyttäjään kunnes kaikki tarvittava tieto on ladattu. Asynkroninen lataaminen sallii eri osien lataamisen samanaikaisesti, jolloin suoritin voi samalla reagoida käyttäjään. JavaScript salli tällaisen asynkronisuuden ainoastaan Web Workers rajapinnan kautta\cite{htmlwebworkers}, joten ominaisuutta ei löydy oletuksena WebGL:ää käyttäessä.
+
+Yksi HTML5:n hyödyllisistä ominaisuuksista ovat elementti-kohtaiset rajapinnat. Esimerkiksi \begin{verbatim}<img>\end{verbatim}elemetin JavaScript-rajapinnasta löytyy \begin{verbatim}onload\end{verbatim}-funktio, joka sallii kehittäjän määritellä mitä tehdään kun kyseisen elementin määrittelemä kuva on ladattu valmiiksi. JavaScriptissä tai WebGL:ssä ei ole tällaista toiminnallisuutta 3D-objekteille: HTML5 ei määrittele tällaisille objekteille erityisiä elementtejä.
+
+Tärkeä asia pitää mielessä WebGL:ssä on että se perustuu OpenGL ES:ään, joka vuorostaan sisältää vain osan täysimittaisen OpenGL-kirjaston toiminnallisuudesta (kuten OpenGL 3.0)\cite{khronosopenwebgldiff}. Näin ollen kehittäjä joka on kokenut OpenGL-koodaaja ei välttämättä ole niin tehokas kuin voisi toivoa: WebGL:n rajallisuus OpenGL:ään verrattuna saattaa vaatia sopeutumista.
+
+Huomattavin puute WebGL:ssä muihin grafiikkakirjastoihin verrattuna on lineaarialgebran puuttuminen. 3D-grafiikan piirtämisessä käytetään huomattavia määriä erilaista matriisilaskentaa. Näitä funktioita ei löydy WebGL:stä, joten kehittäjän on joko toteutettava ne itse tai käytettävä kolmannen osapuolen kehittämää kirjastoa.
+\subsection{Alustariippumattomuus}
