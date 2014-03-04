@@ -33,8 +33,14 @@
 \usepackage{hyperref}   % linkkejä
 \usepackage{graphicx}   % kuvia
 \usepackage[font=footnotesize,labelfont=bf]{caption}   % Kuvatekstejä
+\usepackage[font=footnotesize,labelfont=bf]{subcaption} % Alikuvatekstejä
+\usepackage{color}  % värejä
 
 % Koko dokumentin kattavia asetuksia:
+
+% Muutetaan koodi-osioiden nimet
+\renewcommand\lstlistingname{Koodi}
+\renewcommand\lstlistlistingname{Koodit}
 
 % Tavutettavia sanoja:
 %\hyphenation{vää-rin me-ne-vi-en eri-kois-ten sa-no-jen tavu-raja-ehdo-tuk-set}
@@ -251,9 +257,6 @@
 \clearpage
 
 \input{kandi_teksti_materiaali}
-\clearpage
-
-\input{kandi_teksti_arviointi}
 \clearpage
 
 \input{kandi_teksti_johtopaatokset}

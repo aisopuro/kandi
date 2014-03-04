@@ -2,13 +2,18 @@
 \label{sec:materiaali}
 \hyperlink{index}{Takaisin sisällysluetteloon}
 \subsection{Suorituskyky}
-Selkein WebGL:n tarjoama etu on suorituskyky: mahdollisuus suorittaa laskentaa näytönohjaimessa suorittimen sijasta on huomattavasti nopeampaa: Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia\cite{hoetzlein}. WebGL pärjää myös yllättävän hyvin natiivia toteutusta vastaan. C++-pohjainen yksinkertainen OpenGL-sovellus on WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus\cite{hoetzlein}. Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
+Selkein WebGL:n tarjoama etu on suorituskyky: mahdollisuus suorittaa laskentaa näytönohjaimessa suorittimen sijasta on huomattavasti nopeampaa: Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia. C++-pohjainen yksinkertainen OpenGL-sovellus on yllättäen WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus.\cite{hoetzlein} Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
 
-Pelinkehittäjän kannattaa siis ottaa huomioon että WebGL on huomattavasti hitaampi kuin optimoitu natiivi sovellus, mikä oli odotettavissa. Huomionarvoisempaa on kuitenkin että WebGL ei itse ole pääsyyllinen kyseiseen eroon: Taulusta \ref{tab:hoetzlein_diff} ilmenee että vaikka WebGL-koodin optimointi lyhensi piirtämisaikaa noin 80\%, kokonaispiirtämisaika pieneni ainoastaan noin 23\%\footnote{WebGL, sprites, Chrome: piirtämisaika 4.3ms, kokonaisaika 59.0ms. WebGL, VBOs, Chrome: piirtämisaika 23.0ms, kokonaisaika 77.0ms. 1 - (4.3 / 23.0) = \textbf{0.813}. 1 - (59 / 77) = \textbf{23.4}.}. Kuva \ref{fig:hoetzlein_comparison} esittelee havainnot graafisessa muodossa.
+Pelinkehittäjän kannattaa siis ottaa huomioon että WebGL on huomattavasti hitaampi kuin optimoitu natiivi sovellus, mikä oli odotettavissa. Huomionarvoisempaa on kuitenkin että WebGL ei itse ole pääsyyllinen kyseiseen eroon: Taulusta \ref{tab:hoetzlein_diff} ilmenee että vaikka WebGL-koodin optimointi lyhensi piirtämisaikaa noin 80\%, kokonaispiirtämisaika pieneni ainoastaan noin 23\%\footnote{WebGL, sprites, Chrome: piirtämisaika 4,3 ms, kokonaisaika 59,0 ms. WebGL, VBOs, Chrome: piirtämisaika 23,0 ms, kokonaisaika 77,0 ms. 1 - (4,3 / 23,0) = \textbf{0,813}. 1 - (59 / 77) = \textbf{23,4}.}. \autoref{fig:hoetzlein_comparison} esittelee havainnot graafisessa muodossa.
 
 \begin{table}[h]
-    \includegraphics{hoetzlein_table_approach_diffs}
     \caption{\label{tab:hoetzlein_diff}Hoetzleinin\cite{hoetzlein} mittaustulokset erilaisista toteutuksista.}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        Implementaatio & Simulointi (ms) & Piirto (ms) & Kokonaisaika (ms) \\ \hline
+        WebGL, ei-optimoitu, Chrome & 54,0 & 23,0 & 77,0 \\ \hline
+        WebGL, optimoitu, Chrome & 54,7 & 4,3 & 59,0 \\ \hline
+    \end{tabular}
 \end{table}
 
 \begin{figure}[h]
@@ -16,11 +21,12 @@ Pelinkehittäjän kannattaa siis ottaa huomioon että WebGL on huomattavasti hit
     \caption{\label{fig:hoetzlein_comparison}Hoetzleinin\cite{hoetzlein} havainnot eri teknologioiden nopeuksista. Oranssit palkit kuvastavat simulointiaikaa, siis se aika joka vaadittiin laskemaan piirrettävien objektien uudet sijainnit (Simulation). Siniset palkit kuvaavat itse piirtämiseen (Rendering) kulunutta aikaa. Matalammat palkit vastaavat nopeampaa laskentaa.}
 \end{figure}
 
-Pelinkehittäjälle olennaista on huomata että "WebGL with JavaScript":in nopeammassa toteutuksessa WebGL:n osuus kuluneesta ajasta on paljon pienempi kuin JavaScriptin: kehittäjä saattaa päästä paljon parempiin tuloksiin jos hän keskittyy WebGL:n sijasta JavaScriptin optimointiin.  
+Pelinkehittäjälle olennaista on huomata että "WebGL with JavaScript":in nopeammassa toteutuksessa WebGL:n osuus kuluneesta ajasta on paljon pienempi kuin JavaScriptin: kehittäjä saattaa päästä paljon parempiin tuloksiin jos hän keskittyy WebGL:n sijasta JavaScriptin optimointiin. Hoetzleinin\cite{hoetzlein} toteutuksessa esimerkiksi fysiikan laskenta suoritetaan JavaScript-koodissa. Tällaisen laskennan sirtäminen näytönohjaimeen saattaisi nopeuttaa piirtämistä huomattavasti. 
 
 \subsection{Kirjasto}
 
 \subsubsection{Kattavuus}
+\label{subsec:kattavuus}
 
 Pelinkehittäjän on aina hyvä tietää mihin valittu teknologia pystyy ja mitä puutteita sillä on. Di Benetto\cite{dibenedettoSpider} on tunnistanut muutaman tällaisen:
 
@@ -33,7 +39,28 @@ Tärkeä asia pitää mielessä WebGL:ssä on että se perustuu OpenGL ES:ään,
 
 Huomattavin puute WebGL:ssä muihin grafiikkakirjastoihin verrattuna on lineaarialgebran puuttuminen. 3D-grafiikan piirtämisessä käytetään huomattavia määriä erilaista matriisilaskentaa. Näitä funktioita ei löydy WebGL:stä, joten kehittäjän on joko toteutettava ne itse tai käytettävä kolmannen osapuolen kehittämää kirjastoa.
 
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\lstset{ %
+    numbers=left, %
+    basicstyle=\footnotesize\ttfamily, %
+    breaklines=true, %
+    frame=single, %
+    morekeywords={var}, %
+    breakatwhitespace=true
+}
 \subsubsection{Helppokäyttöisyys}
+Tässä osiossa helppokäyttöisyyttä katsastetaan vertailemalla WebGL-koodin monimutkaisuutta muihin toteutuksiin. Kirjaston helppokäyttöisyyttä voi myös katsastella esimerkiksi dokumentaation laadun ja koodin struktuurin näkökulmista. Tällainen tarkka katsastus ei kuitenkaan kuulu tämän työn puitteisiin, joten tässä keskitytään ainoastaan lähdekoodin monimutkaisuuden vertailuun.
+
+Verrattavat toteutukset ovat erittäin tiiviisti kirjoitettu, eikä niiden tarkkaa toimintaa ole tarpeellista ymmärtää. Lähdekoodit ovat erinäisten toteutusten piirtosilmukoita, kaikki Hoetzleinin\cite{hoetzlein} tutkimuksesta. Piirtosilmukka yksinkertaisesti tarkoittaa sitä osaa koodista joka piirtää kuvan ruudulle. Ennen piirtosilmukoiden ajoa on jokaisessa toteutuksessa laskettu piirrettävien esineiden uudet sijainnit jollakin metodilla joka on kaikissa toteutuksissa hyvin samanlainen\cite{hoetzlein}. 
+
+\autoref{code:hoetzlein_js} kuvastaa Canvas 2D Context -rajapintaa hyödyntävää JavaScript-toteutusta. Tämä on hyvin yksinkertainen piirtosilmukka joka ajetaan kokonaan suorittimessa. Vertaamalla tätä koodeihin \ref{code:hoetzlein_cpp} ja \ref{code:hoetzlein_webgl} nähdään että koodin määrä moninkertaistuu, jota voi pitää selvänä merkkinä monimutkaistumisesta.
+
+\autoref{code:hoetzlein_cpp} ja \autoref{code:hoetzlein_webgl} eivät kuitenkaan eroa toisistaan yhtä paljon: C++-koodin rivimäärä ei eroa WebGL-koodin rivimäärästä yhtä dramaattisesti kuin JavaScript-koodin rivimäärästä. OpenGL- ja WebGL-rajapinnat kuitenkin eroavat toisistaan kattavuuden suhteen, kuten kappaleessa \ref{subsec:kattavuus} eriteltiin. Nämä eroavaisuudet kuitenkin koskettavat pääasiassa sellaisia henkilöitä joille jompi kumpi rajapinta on ennestään tuttu. Lähdekoodin tasolla voidaan olettaa eroja olevan vähemmän, joten kummatkin rajapinnat ovat oletettavasti yhtä helppoja käyttää. 
+
+\lstinputlisting[float, language=Java, caption={2D Context-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_js}]{hoetzlein_loop_js.js}
+\lstinputlisting[float, language=C++, caption={OpenGL-rajapintaa käyttävä, C++-kilellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_cpp}]{hoetzlein_loop_c.cpp}
+\lstinputlisting[float, language={Java}, caption={WebGL-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_webgl}]{hoetzlein_loop_webgl_js.js}
 
 \subsection{Alustariippumattomuus}
 
