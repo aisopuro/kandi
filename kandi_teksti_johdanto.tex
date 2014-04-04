@@ -3,16 +3,15 @@
 
 Tämä kandidaatintyö käsittelee HTML5:n WebGL-ohjelmointirajapintaa pelinkehittäjän näkökulmasta. 
 
-HTML5-spesifikaatio on mahdollistanut kaikenlaisen median esittämisen verkossa ilman että käyttäjän tarvitsee asentaa erillisiä lisäosia. Yksi näistä uusista rajapinnoista on WebGL jonka kautta verkkosivun on mahdollista käyttää tietokoneen näytönohjainta piirtämiseen.
+HTML5-spesifikaatio on mahdollistanut kaikenlaisen median esittämisen verkossa ilman, että käyttäjän tarvitsee asentaa erillisiä lisäosia. Yksi näistä uusista rajapinnoista on WebGL, jonka kautta verkkosivun on mahdollista käyttää tietokoneen näytönohjainta teoriassa alustasta riippumatta.
 
-Erityisesti monimutkaista ja tarkkaa interaktiota vaativat pelit tarvitsevat nopeaa grafiikan piirtämistä ruudulle. Alustasta riippumaton grafiikkaohjelmointi on erittäin kiinnostavaa tästä näkökulmasta. 
+Erityisesti monimutkaista ja tarkkaa interaktiota vaativat pelit tarvitsevat nopeaa grafiikan piirtämistä ruudulle. Jokaiselle alustalle erikseen räätälöidyt ratkaisut ovat kuitenkin kalliita ja hankalia ylläpitää, joten alustasta riippumaton grafiikkaohjelmointi on erittäin kiinnostavaa tästä näkökulmasta. 
 
-Kirjallisuudessa on käsitelty WebGL:n käyttömahdollisuuksia erinäisillä aloilla. Useimmat tällaiset käsittelyt ovat kuitenkin yksittäisiä sovelluksia: yleistä arviota WebGL:n eduista ja haitoista pelinkehityksessä ei ole tehty. 
+Kirjallisuudessa on käsitelty WebGL:n käyttömahdollisuuksia erinäisillä aloilla. Useimmat tällaiset käsittelyt ovat kuitenkin yksittäisiä sovelluksia. Yleistä arviota WebGL:n eduista ja haitoista pelinkehityksessä ei ole tehty. 
 
 Tämän kandidaatintyön tavoitteena on kerätä pelinkehittäjän kannalta hyödyllisiä havaintoja WebGL:stä. Työssä pyritään tunnistamaan sellaiset WebGL:n ominaispiirteet jotka  pelinkehittäjän tulisi ottaa huomioon.
-Tämä työ ei tule käsittelemään muita selaimen grafiikka-esitykseen liittyviä teknologioita, kuten Canvas 2D context tai Flash. Teknologioita verrataan WebGL:ään, mutta niiden erityispiirteitä ei tutkita tässä työssä tarkemmin. Työssä ei myöskään pyritä toteamaan WebGL:n paremmuudesta mitään konkreettista. Löytöjen perusteella peinkehittäjän on yhä itse päätettävä mikä teknologia soveltuu hänen projektiinsa parhaiten. 
+Tämä työ ei tule käsittelemään muita selaimen grafiikan esitykseen liittyviä teknologioita, kuten Canvas 2D context tai Flash. Teknologioita verrataan WebGL-rajapintaan, mutta niiden erityispiirteitä ei tutkita tässä työssä tarkemmin.
 
-Työ toteutetaan kirjallisuuskatsauksena. Aineisto koostuu tieteellisistä artikkeleista ja kirjoista jotka käsittelevät WebGL:ää. Erityisesti viitataan teksteihin joissa on konkreettisten toteutusten yhteydessä havaittu WebGL:n ominaispiirteitä.
+Työ toteutetaan kirjallisuuskatsauksena. Aineisto koostuu yliopistojen julkaisuista, tieteellisistä artikkeleista ja kirjoista jotka käsittelevät WebGL-rajapintaa. Erityisesti viitataan teksteihin joissa on konkreettisten toteutusten yhteydessä havaittu WebGL:n ominaispiirteitä. Aiheesta ei ole löytynyt suuria määriä kirjallisuutta, joten tieteelliset lähteet on tulkittu hyväksyttäviksi kunhan ne on julkaistu jonkin yliopiston toimesta tai ne löytyvät Scopus-tietokannasta.
 
-Ensiksi alustetaan aiheen taustaa: esitellään HTML5 ja grafiikan piirtäminen. Seuraavaksi selvitetään tarkemmin pelinkehittäjän tarpeet sekä WebGL-spesifikaation tarjoamat edut. Tämän jälkeen eritellään tutkimusmenetelmät: lähteiden rajauskriteerit selvitetään ja kerrotaan kuinka ne on määrätty luotettaviksi.
-Lopuksi aineistosta kerätty tieto kootaan eheäksi kokonaisuudeksi, josta viimein tullaan lopullisiin johtopäätöksiin.
+Ensiksi alustetaan aiheen taustaa: esitellään HTML5, JavaScript, grafiikan piirtämisen rajapintoja. Seuraavaksi esitellään lyhyesti WebGL-rajapinnalla tehtyjä sovelluksia. Tämän jälkeen eritellään pelinkehittäjän tarpeita ja käydään läpi WebGL-rajapinnasta tehdyt havainnot hänen näkökulmasta. Lopuksi havainnoista tehdään lyhyt yhteenveto, jossa esitetään suositus minkälaisiin projekteihin WebGL-rajapinnan käyttö soveltuu.

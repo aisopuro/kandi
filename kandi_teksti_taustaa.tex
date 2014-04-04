@@ -2,50 +2,29 @@
 \label{sec:taustaa}
 \hyperlink{index}{Takaisin sisällysluetteloon}
 
-\subsection{HTML5}
-HTML5 on uusin versio HyperText Markup Language-kielestä. Yksi HTML5:n tuomia uudistuksia on erinäisten media-formaattien sisäistäminen itse spesifikaatioon erinäisten rajapintojen kautta\cite{html5diff}. Näin ollen sisällöntuottajien ja käyttäjien ei tarvitse huolehtia kolmansien osapuolten liitännäisistä kuten Flash. Tällöin sisällöntuottaja voi olla varma siitä että kaikke ne joilla on spesifikaatiota noudattava selain pääsevät käsiksi hänen tuottamaan sisältöön. Täten alustojen erilaisuuksien ei pitäisi ainakaan teoriassa vaikuttaa sovellukseen, jolloin sisällöntuottaja voi keskittyä luomaan sisältöä ainoastaan yhdelle alustalle.
+\subsection{Selainteknologiat}
+Seuraavaksi esitellään tämän työn kannalta keskeisimmät verkkoselaimissa käytetyt teknologiat. 
 
-\subsection{Intensiivinen grafiikka}
-Intensiivisellä grafiikalla tarkoitetaan tässä yhteydessä grafiikkaa jonka piirtäminen vaatii huomattavan määrän laskentatehoa. Esimerkiksi yksittäisen digitaalisen valokuvan piirtäminen ruudulle ei ole intensiivistä grafiikkaa. Fysikaalisen ilmiön (kuten veden) simuloiminen ja piirtäminen ruudulle taas on hyvin intensiivistä ja voi veden liikkeistä riippuen vaatia suuria määriä laskentatehoa.
+\subsubsection{HTML5}
+HTML5 on uusin versio \textbf{H}yper\textbf{T}ext \textbf{M}arkup \textbf{L}anguage-kielestä. Yksi HTML5-kielen tuomia uudistuksia on erinäisten media-formaattien sisäistäminen itse spesifikaatioon erinäisten rajapintojen kautta\cite{html5diff}. Näin ollen sisällöntuottajien ja käyttäjien ei tarvitse huolehtia kolmansien osapuolten liitännäisistä kuten Flash. Tällöin sisällöntuottaja voi olla varma siitä että kaikki ne joilla on spesifikaatiota noudattava selain pääsevät käsiksi hänen tuottamaan sisältöön. Täten alustojen erilaisuuksien ei pitäisi ainakaan teoriassa vaikuttaa sovellukseen, jolloin sisällöntuottaja voi keskittyä luomaan sisältöä ainoastaan yhdelle alustalle.
+
+\subsubsection{JavaScript}
+JavaScript-kieli on laajasti käytössä oleva ohjelmointikieli. Kieli on toteutus ECMAScript-standardista\cite{ecmascript} jota käytetään pääasiassa verkkosivujen ohjelmointiin\cite{mdnjs}. Kieli mahdollistaa verkkosivujen reaaliaikaisen muuttamisen, animoinnit sekä käyttäjän interaktiot. Useimmat HTML5-kielen määrittämät rajapinnat ovat juuri JavaScript-ohjelmia varten tarkoitettuja.
+
+\subsubsection{Canvas-elementti}
+\texttt{<canvas>}-elementti on HTML5-spesifikaation määrittelemä elementti jonka voi sisällyttää verkkosivulleen HTML5-koodissa. Elementin tarkoitus on toimia piirtoalustana: ohjelmoija voi rajapintojen kautta piirtää \texttt{<canvas>}-elementille grafiikkaa. Yksi näistä rajapinnoista on tämän työn käsittelemä WebGL-rajapinta.\cite{canvas_spec}
+
+\subsection{Intensiivinen grafiikka ja näytönohjaimen rajapinnat}
+Intensiivisellä grafiikalla tarkoitetaan tässä yhteydessä grafiikkaa jonka piirtäminen vaatii huomattavan määrän laskentatehoa. Esimerkiksi yksittäisen digitaalisen valokuvan piirtäminen ruudulle ei ole intensiivistä grafiikkaa. Fysikaalisen ilmiön (kuten veden) simuloiminen ja piirtäminen ruudulle taas on hyvin intensiivistä ja voi veden liikkeistä ja koostumuksesta riippuen vaatia suuria määriä laskentatehoa.
 
 \subsubsection{Peligrafiikka}
-Pelialalla intensiivinen grafiikka yhdistyy useimmiten fysiikan simulointiin, kolmiuloitteisiin ympäristöihin ja monimutkaisiin esineisiin pelimaailmassa. Vaikka tällaisia asioita voidaan periaatteessa simuloida tietokoneen pääsuorittimella, teho jää nopeasti riittämättömäksi: liian intensiivinen grafiikka hidastaisi konetta sen verran että käyttökokemus kärsii. Graafisesti monimutkaisten pelien laskenta on näin ollen siirrettävä yleispätevästä suorittimesta graafiseen laskentaan erikoistuneeseen yksikköön: näytönohjaajaan. 
+Pelialalla intensiivinen grafiikka yhdistyy useimmiten fysiikan simulointiin, kolmiuloitteisiin ympäristöihin ja monimutkaisiin esineisiin pelimaailmassa. Vaikka tällaisia asioita voidaan periaatteessa simuloida tietokoneen pääsuorittimella, teho jää nopeasti riittämättömäksi. Liian intensiivinen grafiikka hidastaisi konetta sen verran että käyttökokemus kärsii. Graafisesti monimutkaisten pelien laskenta on näin ollen siirrettävä yleispätevästä suorittimesta näytönohjaimeen, joka on graafiseen laskentaan erikoistunut laitekomponentti. 
 
-\subsubsection{OpenGL}
-OpenGL on alusta- ja kieliriippumaton ohjelmointirajapinta tietokoneiden näytönohjaimille\cite{opengl4}. Ohjelmoija voi käyttää OpenGL kirjastoa tehdäkseen kutsuja näytönohjaimelle, ilman että hänen tarvitsee käyttää näytönohjaimen omaa, matalan tason käskykantaa. Vastaava teknologia on DirectX\cite{directx}, Microsoftin ylläpitämä lisensioitava rajapinta-kirjasto.
+\subsubsection{OpenGL-rajapinta}
+OpenGL (\textbf{Open} \textbf{G}raphics \textbf{L}ibrary) on alusta- ja kieliriippumaton ohjelmointirajapinta tietokoneiden näytönohjaimille\cite{opengl4}. Ohjelmoija voi käyttää OpenGL-kirjastoa tehdäkseen kutsuja näytönohjaimelle, ilman että hänen tarvitsee käyttää näytönohjaimen omaa, matalan tason käskykantaa. Vastaava teknologia on DirectX\cite{directx}, Microsoftin ylläpitämä lisensioitava rajapinta-kirjasto, joka on tarkoitettu yksinomaan Windows-käyttöjärjestelmälle.
 
-\subsubsection{OpenGL ES}
-OpenGL ES (Embedded Systems) on OpenGL-kirjaston versio joka on tarkoitettu käytettäväksi sulautetuissa järjestelmissä, kuten pelikonsoleissa, puhelimissa ja tabletti-tietokoneissa\cite{opengles}. 
+\subsubsection{OpenGL ES-rajapinta}
+OpenGL ES (\textbf{E}mbedded \textbf{S}ystems) on OpenGL-kirjaston versio joka on tarkoitettu käytettäväksi sulautetuissa järjestelmissä, kuten pelikonsoleissa, puhelimissa ja tabletti-tietokoneissa. OpenGL ES on rajatumpi versio täydestä OpenGL-kirjastosta, jotta se olisi mahdollisimman laajasti käytettävä.\cite{opengles} 
 
-\subsubsection{WebGL}
-WebGL on JavaScript-rajapinta HTML5:n canvas-elementtiä varten. WebGL perustuu pitkälti OpenGL ES:ään\cite{webgl_specification}. Rajapinta sallii näytönohjaimen käskyttämisen JavaScript-koodista. Näin ollen JavaScript-ohjelmoija voi piirtää <canvas>-elementille kuvia WebGL:llä samalla tavoin kuin natiivisovellus tekisi esimerkiksi C++:aa ja OpenGL:ää käyttäen.
-
-\subsection{Pelinkehittäjän tarpeet}
-Erityisesti nopeita reaktioita vaativien pelien pelattavuus kärsii huomattavasti liian pienillä ruudun päivitysnopeuksilla: ero pelaajan pelaamiskyvyssä korkeiden ja matalien piirtotaajuuksien välillä on huomattava: kuvat \ref{fig:claypool_performance} ja \ref{fig:claypool_quality} havainnollistavat Claypoolin tutkimusryhmän saamia tuloksia tutkittaessa kuvanlaadun ja piirtotiheyden vaikutusta pelaajiin. 
-
-\begin{figure}[h]
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{claypool_score_to_fps_512x384}
-        \caption{\label{fig:claypool_performance:fps}Pelaajien saamat pisteet suhteutettuna päivitystiheyteen. Resoluutio 512x384 kuvapistettä.}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{claypool_score_to_rez_15fps}
-        \caption{\label{fig:claypool_performance:rez}Pelaajien saamat pisteet suhteutettuna resoluutioon. Päivitystiheys on 15 ruutua sekunnissa.}
-    \end{subfigure}
-    \caption{\label{fig:claypool_performance}Claypoolin tutkimusryhmän\cite{claypool_fps} havaintoja grafiikan laadun vaikutuksista pelaamiskykyyn. Suurempi pistemäärä kuvastaa parempaa pelimenestystä.}
-\end{figure}
-\begin{figure}[h]
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{claypool_score_to_fps_512x384}
-        \caption{\label{fig:claypool_quality:fps}Pelaajien antamat arvosanat suhteutettuna päivitystiheyteen. Resoluutio 512x384 kuvapistettä.}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{claypool_score_to_rez_15fps}
-        \caption{\label{fig:claypool_quality:rez}Pelaajien antamat arvosanat suhteutettuna resoluutioon. Päivitystiheys on 15 ruutua sekunnissa.}
-    \end{subfigure}
-    \caption{\label{fig:claypool_quality}Claypoolin tutkimusryhmän\cite{claypool_fps} saamia kyselytuloksia. Kyselyissä pyydettiin koehenkilöitä antamaan pelin visuaaliselle laadulle arvosana asteikolla 0-5.}
-\end{figure}
-
-Kuvien \ref{fig:claypool_performance:fps} ja \ref{fig:claypool_quality:fps} perusteella voidaan päätellä että päivitystiheydellä on suuri vaikutus pelaajan kokemuksiin pelistä erityisesti tiheyden ollessa matala. Toisaalla vertaamalla kuvaa \ref{fig:claypool_quality:rez} muihin voimme nähdä että päivitystiheyden noustessa yli 30 ruutuun sekunnissa resoluutiolla on suurempi vaikutus pelaajien mielipiteeseen pelin visuaalisesta laadusta\cite{claypool_fps}. 
-
-Näin ollen pelin sunnittelijan kannattaa rajata pelinsä sisältö sellaiseksi että se pystytään esittämään tarvittavan sujuvassa muodossa. Tällöin joidenkin pelityyppien näyttävyys saattaa rajautua huomattavasti jos ne ovat ollenkaan toteutettavissa. Jos WebGL on toimiva työkalu, se lisäisi pelinkehittäjien ilmaisuvoimaa. Paljon laskentatehoa vaativat pelityypit ovat tähän mennessä olleet pakostakin natiivisovelluksia: jos WebGL toimii hyvin, se mahdollistaisi helpomman ja halvemman kehitystyön tällaisille peleille.
+\subsubsection{WebGL-rajapinta}
+WebGL (\textbf{Web} \textbf{G}raphics \textbf{L}ibrary) on JavaScript-rajapinta \texttt{<canvas>}-elementtiä varten. WebGL perustuu pitkälti OpenGL ES:ään\cite{webgl_specification}. Rajapinta sallii näytönohjaimen käskyttämisen JavaScript-koodista. Näin ollen JavaScript-ohjelmoija voi piirtää \texttt{<canvas>}-elementille kuvia WebGL-rajapinnan kautta samalla tavoin kuin natiivisovellus tekisi esimerkiksi C++-kieltä ja OpenGL-rajapintaa käyttäen.

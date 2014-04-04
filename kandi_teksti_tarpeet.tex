@@ -1,3 +1,34 @@
 \section{Pelinkehittäjän tarpeet}
 \label{sec:tarpeet}
 \hyperlink{index}{Takaisin sisällysluetteloon}
+
+Erityisesti nopeita reaktioita vaativien pelien pelattavuus kärsii huomattavasti liian pienillä ruudun päivitysnopeuksilla. Ero pelaajan pelaamiskyvyssä korkeiden ja matalien piirtotaajuuksien välillä on huomattava: kuvat \ref{fig:claypool_performance} ja \ref{fig:claypool_quality} havainnollistavat Claypoolin tutkimusryhmän\cite{claypool_fps} saamia tuloksia tutkittaessa kuvanlaadun ja piirtotiheyden vaikutusta pelaajiin. 
+
+\begin{figure}[h]
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{claypool_score_to_fps_512x384}
+        \caption{\label{fig:claypool_performance:fps}Pelaajien saamat pisteet suhteutettuna päivitystiheyteen. Resoluutio 512x384 kuvapistettä.}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{claypool_score_to_rez_15fps}
+        \caption{Pelaajien saamat pisteet suhteutettuna resoluutioon. Päivitystiheys on 15 ruutua sekunnissa.\label{fig:claypool_performance:rez}}
+    \end{subfigure}
+    \caption{\label{fig:claypool_performance}Claypoolin tutkimusryhmän\cite{claypool_fps} havaintoja grafiikan laadun vaikutuksista pelaamiskykyyn. Suurempi pistemäärä kuvastaa parempaa pelimenestystä.}
+\end{figure}
+\begin{figure}[h]
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{claypool_quality_to_fps_512x384}
+        \caption{\label{fig:claypool_quality:fps}Pelaajien antamat arvosanat suhteutettuna päivitystiheyteen. Resoluutio 512x384 kuvapistettä.}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{claypool_quality_to_rez_15fps}
+        \caption{\label{fig:claypool_quality:rez}Pelaajien antamat arvosanat suhteutettuna resoluutioon. Päivitystiheys on 15 ruutua sekunnissa.}
+    \end{subfigure}
+    \caption{\label{fig:claypool_quality}Claypoolin tutkimusryhmän\cite{claypool_fps} saamia kyselytuloksia. Kyselyissä pyydettiin koehenkilöitä antamaan pelin visuaaliselle laadulle arvosana asteikolla 0-5.}
+\end{figure}
+
+Kuvan \ref{fig:claypool_performance:fps} mukaan piirtotaajudella on suuri vaikutus pelaajiin jotka pelaavat intensiivistä, nopeaa reagointikykyä vaativaa peliä. Claypoolin tutkimusryhmän löydökset\cite{claypool_fps} osoittavat näin ollen yhden pelinkehittäjän konkreettisen tarpeen. Liian vähäinen piirtotaajuus voi pahimmassa tapauksessa tehdä pelistä pelaamattoman.  
+
+Kuvien \ref{fig:claypool_performance:fps} ja \ref{fig:claypool_quality:fps} perusteella voidaan lisäksi päätellä että päivitystiheydellä on suuri vaikutus pelaajan kokemuksiin pelistä erityisesti tiheyden ollessa matala. Toisaalla vertaamalla kuvaa \ref{fig:claypool_quality:rez} muihin voimme nähdä että päivitystiheyden noustessa yli 30 ruutuun sekunnissa resoluutiolla on suurempi vaikutus pelaajien mielipiteeseen pelin visuaalisesta laadusta\cite{claypool_fps}. 
+
+Näin ollen pelin sunnittelijan kannattaa rajata pelinsä sisältö sellaiseksi että se pystytään esittämään tarvittavan sujuvassa muodossa. Tällöin joidenkin pelityyppien näyttävyys saattaa rajautua huomattavasti jos ne ovat ollenkaan toteutettavissa. Jos WebGL on toimiva työkalu, se lisäisi pelinkehittäjien ilmaisuvoimaa selaimessa pelattavilla peleillä. Paljon laskentatehoa vaativat pelityypit ovat tähän mennessä olleet pakostakin natiivisovelluksia: jos WebGL toimii hyvin, se mahdollistaisi helpomman ja halvemman kehitystyön tällaisille peleille.

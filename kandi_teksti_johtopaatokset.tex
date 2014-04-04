@@ -1,3 +1,17 @@
-\section{Johtopäätökset}
+\section{Yhteenveto}
 \label{sec:johtopaatokset}
 \hyperlink{index}{Takaisin sisällysluetteloon}
+
+Olemassaoleva kirjallisuus ei ole erityisen kattavaa, mutta materiaalista on mahdollista johtaa pelinkehittäjälle suuntaa-antavia johtopäätöksiä.
+
+Ensinnäkin pelinkehittäjän on huomioitava WebGL-rajapinnan suorituskykyyn liittyvät ominaispiirteet. Huomionarvoista on että WebGL-koodin suorituskyky ei vaikuta lopputulokseen yhtä vahvasti kuin se JavaScript-koodi josta WebGL-koodia ajetaan, joten suorituskykyä parantaessa kehittäjän kannattaa ehdottomasti ensin keskittyä JavaScript-koodin nopeuttamiseen. 
+
+Toiseksi WebGL-kirjastossa saattaa olla puutteita: rajapinta on tarkoitettu toimimaan niin päätelaitteilla kuin mobiililaitteilla, joten sen on tarkoitus olla kevyt ja monikäyttöinen. Kehittäjän täytyy varmistaa että osaaminen riittää tai käyttää jotakin kehitystä tukevaa, WebGL-kirjaston päälle kehitettyä kirjastoa.
+
+Kolmanneksi WebGL ei ole puhtaasti alusta-riippumaton: erot suorituskyvyssä ja lopputuloksissa sekä rajoitteet tuetuissa näytönohjaimissa tarkoittavat, että kehittäjä ei voi olettaa pelin toimivan yhtä laajalti kuin esimerkiksi Canvas 2D-Context-rajapintaan pohjautuva peli. Kuitenkin koodin ylläpidettävyydessä saavutetut hyödyt voivat olla mittavia.
+
+Yleisvaikutelma WebGL-rajapinnasta kielii keskeneräisyyttä. Rajapinta on verrattain nuori, eivätkä selainvalmistajat ole kaikesta päätellen saaneet toteutuksiaan toimimaan täysin yhteneväisesti. Tulevaisuudessa nämä eroavaisuudet saattavat kadota selainvalmistajien parantaessa toteutuksiaan. Pelinkehittäjän kannalta on oleellisinta on että WebGL on muiden toteutuksien välimaastossa. WebGL-koodi on huomattavasti monimutkaisempaa kuin Canvas 2D-Context-rajapintaa käyttävä koodi, mutta pystyy paljon tehokkaampaan laskentaan. Kuitenkaan se ei yllä optimoidun, natiivin sovelluksen tasolle. WebGL-rajapinta on huomattavasti alustariippumattomampi kuin natiivi sovellus, mutta ei kuitenkaan ole yhtä universaali kuin yksinkertaisemmat sovellukset. 
+
+WebGL-rajapinta soveltunee parhaiten juuri peleihin jotka jäävät näiden kahden ääripään väliin. Pelit jotka vaativat sujuvaa piirtoa johon Canvas 2D Context-rajapinta ei yksinkertaisesti riitä, mutta jotka eivät kuitenkaan vaadi keskivertoa tehokkaampia tietokoneita. WebGL tarjoaa parempaa alustariippumattomuutta kuin natiivi OpenGL-koodi, joten WebGL-rajapinta soveltuu pienemmille kehittäjäryhmille joilla ei ole resursseja työstää montaa eri versiota samasta pelistä. 
+
+WebGL-rajapinnan ominaisuuksista ei tätä työtä varten löytynyt erityisen paljon aiheen kannalta relevanttia kirjallisuutta. Tulevaisuudessa WebGL-rajapinnan tutkimukset voisivat keskittyä esimerkiksi muistin käyttäytymiseen ja laskennan jakoon näytönohjaimen ja JavaScript-koodin välillä. Esimerkiksi voitaisiin tutkia kuinka paljon JavaScript-koodin esikääntäminen tai monien erilaisten kuvien piirtäminen vaikuttaa surituskykyyn.

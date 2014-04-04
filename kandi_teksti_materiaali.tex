@@ -1,62 +1,96 @@
-\section{Tutkimusmateriaali}
+\section{WebGL-rajapinnan ominaisuuksia pelinkehittäjän näkökulmasta}
 \label{sec:materiaali}
 \hyperlink{index}{Takaisin sisällysluetteloon}
 \subsection{Suorituskyky}
-Selkein WebGL:n tarjoama etu on suorituskyky: mahdollisuus suorittaa laskentaa näytönohjaimessa suorittimen sijasta on huomattavasti nopeampaa: Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia. C++-pohjainen yksinkertainen OpenGL-sovellus on yllättäen WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus.\cite{hoetzlein} Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
+Selkein WebGL:n tarjoama etu on suorituskyky. WebGL-rajapinta sallii laskennan suorittamisen näytönohjaimessa suorittimen sijaan, mikä on huomattavasti nopeampaa. Kuvasta \ref{fig:hoetzlein_comparison} nähdään että Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia. C++-pohjainen yksinkertainen OpenGL-sovellus on yllättäen WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus.\cite{hoetzlein} Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
 
-Pelinkehittäjän kannattaa siis ottaa huomioon että WebGL on huomattavasti hitaampi kuin optimoitu natiivi sovellus, mikä oli odotettavissa. Huomionarvoisempaa on kuitenkin että WebGL ei itse ole pääsyyllinen kyseiseen eroon: Taulusta \ref{tab:hoetzlein_diff} ilmenee että vaikka WebGL-koodin optimointi lyhensi piirtämisaikaa noin 80\%, kokonaispiirtämisaika pieneni ainoastaan noin 23\%\footnote{WebGL, sprites, Chrome: piirtämisaika 4,3 ms, kokonaisaika 59,0 ms. WebGL, VBOs, Chrome: piirtämisaika 23,0 ms, kokonaisaika 77,0 ms. 1 - (4,3 / 23,0) = \textbf{0,813}. 1 - (59 / 77) = \textbf{23,4}.}. \autoref{fig:hoetzlein_comparison} esittelee havainnot graafisessa muodossa.
+Pelinkehittäjän kannattaa siis ottaa huomioon, että WebGL on huomattavasti hitaampi kuin optimoitu natiivi sovellus, mikä oli odotettavissa. Huomionarvoisempaa on kuitenkin, että WebGL ei itse ole pääsyyllinen kyseiseen eroon: Taulukosta \ref{tab:hoetzlein_diff} ilmenee, että vaikka WebGL-koodin optimointi lyhensi piirtämisaikaa noin 80 \%, kokonaisaika pieneni ainoastaan noin 23 \%\footnote{WebGL, sprites, Chrome: piirtämisaika 4,3 ms, kokonaisaika 59,0 ms. WebGL, VBOs, Chrome: piirtämisaika 23,0 ms, kokonaisaika 77,0 ms. 1 - (4,3 / 23,0) = \textbf{0,813}. 1 - (59 / 77) = \textbf{23,4}.}.
+
 
 \begin{table}[h]
-    \caption{\label{tab:hoetzlein_diff}Hoetzleinin\cite{hoetzlein} mittaustulokset erilaisista toteutuksista.}
-    \begin{tabular}{|l|l|l|l|}
+    \begin{minipage}{\textwidth}
+    \caption{\label{tab:hoetzlein_diff}Hoetzleinin\cite{hoetzlein}\cite{hoetzlein_data} mittaustulokset erilaisista toteutuksista piirtäessä 100000 objektia.}
+    \begin{tabular}{ |l|p{2cm}|p{1.1cm}|p{2.5cm}|p{2cm}| }
         \hline
-        Implementaatio & Simulointi (ms) & Piirto (ms) & Kokonaisaika (ms) \\ \hline
-        WebGL, ei-optimoitu, Chrome & 54,0 & 23,0 & 77,0 \\ \hline
-        WebGL, optimoitu, Chrome & 54,7 & 4,3 & 59,0 \\ \hline
+        \textbf{Implementaatio} & \textbf{Simulointi (ms)} & \textbf{Piirto (ms)} & \textbf{Kokonaisaika (ms)} & \textbf{30Hz maksimi\footnote{Suurin määrä objekteja joita voitiin piirtää ja myös yltää 30 ruudun/sekunti päivitystiheyteen.}} \\ \hline
+        HTML5 ja JavaScript, Firefox & 9,7 & 417,0 & 426,7 & 7000 \\ \hline
+        HTML5 ja JavaScript, Chrome & 59,3 & 391,0 & 450,3 & 4000 \\ \hline
+        HTML5 ja JavaScript, IE 9 & 39,0 & 443,3 & 482,3 & 6000 \\ \hline
+        WebGL, naiivi, Chrome & 54,0 & 23,0 & 77,0 & 70000 \\ \hline
+        WebGL, optimoitu, Chrome & 54,7 & 4,3 & 59,0 & 80000 \\ \hline
+        OpenGL, naiivi & 3,3 & 137,9 & 141,2 & 20000 \\ \hline
+        OpenGL, optimoitu & 3,3 & 7,5 & 10,8 & 400000 \\ \hline
     \end{tabular}
+    \end{minipage}
 \end{table}
 
 \begin{figure}[h]
     \includegraphics{hoetzlein_render_execute_comparison_table}
-    \caption{\label{fig:hoetzlein_comparison}Hoetzleinin\cite{hoetzlein} havainnot eri teknologioiden nopeuksista. Oranssit palkit kuvastavat simulointiaikaa, siis se aika joka vaadittiin laskemaan piirrettävien objektien uudet sijainnit (Simulation). Siniset palkit kuvaavat itse piirtämiseen (Rendering) kulunutta aikaa. Matalammat palkit vastaavat nopeampaa laskentaa.}
+    \caption{\label{fig:hoetzlein_comparison}Hoetzleinin\cite{hoetzlein} havainnot eri teknologioiden nopeuksista. Oranssit palkit kuvastavat simulointiaikaa, siis aikaa joka vaadittiin piirrettävien objektien uusien sijaintien laskennassa (Simulation). Siniset palkit kuvaavat itse piirtämiseen (Rendering) kulunutta aikaa. Matalammat palkit vastaavat nopeampaa laskentaa. Mittauksessa piirrettiin 100000 objektia.}
 \end{figure}
 
-Pelinkehittäjälle olennaista on huomata että "WebGL with JavaScript":in nopeammassa toteutuksessa WebGL:n osuus kuluneesta ajasta on paljon pienempi kuin JavaScriptin: kehittäjä saattaa päästä paljon parempiin tuloksiin jos hän keskittyy WebGL:n sijasta JavaScriptin optimointiin. Hoetzleinin\cite{hoetzlein} toteutuksessa esimerkiksi fysiikan laskenta suoritetaan JavaScript-koodissa. Tällaisen laskennan sirtäminen näytönohjaimeen saattaisi nopeuttaa piirtämistä huomattavasti. 
+Pelinkehittäjälle olennaista on huomata, että kuvan \ref{fig:hoetzlein_comparison} "WebGL ja JavaScript"~-osion kummassakin toteutuksessa WebGL-koodin osuus kuluneesta ajasta on paljon pienempi kuin JavaScript-koodin. Kehittäjä saattaa siis päästä paljon parempiin tuloksiin, jos hän keskittyy WebGL-koodin sijasta JavaScript-koodin optimointiin. 
 
-\subsection{Kirjasto}
+JavaScriptin toimintaa voi nopeuttaa niin sanotulla esikääntämisellä. Esikääntämisessä JavaScript-koodi muunnetaan niin että toiminnallisuus ei muutu, mutta koodin struktuuri on tehokkaampaa. Tunnetuin esikääntäjä lienee Google:n Closure-kääntäjä\cite{googleclosure}. Myös muut parannukset ovat mahdollisia. Hoetzleinin\cite{hoetzlein} toteutuksessa esimerkiksi fysiikan laskenta suoritetaan JavaScript-koodissa. Tällaisen laskennan sirtäminen näytönohjaimeen saattaisi nopeuttaa piirtämistä huomattavasti.
 
-\subsubsection{Kattavuus}
-\label{subsec:kattavuus}
+\subsection{WebGL-kirjaston piirteitä}
+\label{subsec:piirteet}
 
-Pelinkehittäjän on aina hyvä tietää mihin valittu teknologia pystyy ja mitä puutteita sillä on. Di Benetto\cite{dibenedettoSpider} on tunnistanut muutaman tällaisen:
+Pelinkehittäjän on aina hyvä tietää, mihin valittu teknologia pystyy ja mitä puutteita sillä on. Di Benetto\cite{dibenedettoSpider} on tunnistanut puutteita WebGL-kirjastosta.
 
+\subsubsection{Lataaminen}
 WebGL on matalan tason kirjasto joka oletusarvoisesti toimii sekä tietokoneilla että mobiililaitteilla. Tästä syystä siitä saattaa puuttua toiminallisuutta joka löytyy oletusarvona suuremmista kirjastoista.
-Yksi tärkeä ominaisuus nykyaikaisissa grafiikkakirjastoissa on asynkroninen lataaminen. Kuvaa piirrettäessä tietokoneen on haettava muistista erinäistä tietoa: tekstuureita, malleja ym. Jos tällaiset tiedot pitää ladata yksi kerrallaan ohjelma saattaa lakata reagoimasta käyttäjään kunnes kaikki tarvittava tieto on ladattu. Asynkroninen lataaminen sallii eri osien lataamisen samanaikaisesti, jolloin suoritin voi samalla reagoida käyttäjään. JavaScript salli tällaisen asynkronisuuden ainoastaan Web Workers rajapinnan kautta\cite{htmlwebworkers}, joten ominaisuutta ei löydy oletuksena WebGL:ää käyttäessä.
+Yksi tärkeä ominaisuus nykyaikaisissa grafiikkakirjastoissa on asynkroninen lataaminen. Kuvaa piirrettäessä tietokoneen on haettava muistista erinäistä tietoa: tekstuureita, malleja ynnä muuta. Jos tällaiset tiedostot pitää ladata yksi kerrallaan ohjelma saattaa lakata reagoimasta käyttäjään kunnes kaikki tarvittava tieto on ladattu. Asynkroninen lataaminen sallii eri osien lataamisen samanaikaisesti, jolloin suoritin voi samalla reagoida käyttäjään. JavaScript salli tällaisen asynkronisuuden ainoastaan Web Workers rajapinnan kautta\cite{htmlwebworkers}, joten ominaisuutta ei löydy oletuksena WebGL-kirjastoa käytettäessä.
 
-Yksi HTML5:n hyödyllisistä ominaisuuksista ovat elementti-kohtaiset rajapinnat. Esimerkiksi <img>-elemetin JavaScript-rajapinnasta löytyy onload-funktio, joka sallii kehittäjän määritellä mitä tehdään kun kyseisen elementin määrittelemä kuva on ladattu valmiiksi. JavaScriptissä tai WebGL:ssä ei ole tällaista toiminnallisuutta 3D-objekteille: HTML5 ei määrittele tällaisille objekteille erityisiä elementtejä tai rajapintoja.
+\subsubsection{HTML-elementtien rajapinnat}
+Yksi HTML5-kielen hyödyllisistä ominaisuuksista ovat elementti-kohtaiset rajapinnat. Esimerkiksi \texttt{<img>}-elemetin JavaScript-rajapinnasta löytyy onload-funktio, joka sallii kehittäjän määritellä mitä tehdään kun kyseisen elementin määrittelemä kuva on ladattu valmiiksi. JavaScriptissä tai WebGL:ssä ei ole tällaista toiminnallisuutta 3D-objekteille: HTML5 ei määrittele 3D-objekteille erityisiä elementtejä tai rajapintoja.
 
-Tärkeä asia pitää mielessä WebGL:ssä on että se perustuu OpenGL ES:ään, joka vuorostaan sisältää vain osan täysimittaisen OpenGL-kirjaston toiminnallisuudesta (kuten OpenGL 3.0)\cite{khronosopenwebgldiff}. Näin ollen kehittäjä joka on kokenut OpenGL-koodaaja ei välttämättä ole niin tehokas kuin voisi toivoa: WebGL:n rajallisuus OpenGL:ään verrattuna saattaa vaatia sopeutumista.
+\subsubsection{Eroavaisuudet täysimittaiseen kirjastoon}
+Tärkeä asia pitää mielessä on, että WebGL perustuu OpenGL ES-rajapintaan, joka vuorostaan sisältää vain osan täysimittaisen OpenGL-kirjaston toiminnallisuudesta (kuten OpenGL 4.0)\cite{khronosopenwebgldiff}. Näin ollen kehittäjä joka on kokenut OpenGL-koodaaja ei välttämättä ole niin tehokas kuin voisi toivoa: WebGL-kirjaston rajallisuus OpenGL-kirjastoon verrattuna saattaa vaatia sopeutumista.
 
-Huomattavin puute WebGL:ssä muihin grafiikkakirjastoihin verrattuna on lineaarialgebran puuttuminen. 3D-grafiikan piirtämisessä käytetään huomattavia määriä erilaista matriisilaskentaa. Näitä funktioita ei löydy WebGL:stä, joten kehittäjän on joko toteutettava ne itse tai käytettävä kolmannen osapuolen kehittämää kirjastoa.
+Kuitenkin perustyökalut muotojen piirtämiseen ovat rajapinnoissa samat. Taulukosta \ref{tab:primitives_open_web} nähdään, että melkein kaikki OpenGL-rajapinnan primitiivit löytyvät myös WebGL-rajapinnasta. Ainoa poikkeus on muoto (Patch) joka on tarkoitettu mosaiikkien luomiseen erilaisista primitiiveistä\cite{opengl_primitives}. Näin ollen pelinkehittäjällä on käytössään samat perusprimittivit kummassakin rajapinnassa.
+
+\begin{table}[h]
+    \caption{\label{tab:primitives_open_web}OpenGL-\cite{opengl_primitives} ja WebGL-rajapinnan\cite[5.14]{webgl_specification} primitiivit.}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Muoto} & \textbf{OpenGL 4.0} & \textbf{WebGL 1.0} \\ \hline
+        Pisteitä & \texttt{GL\_POINT} & \texttt{POINTS} \\ \hline
+        Viivoja & \texttt{GL\_LINES} & \texttt{LINES} \\ \hline
+        Jatkuva viiva & \texttt{GL\_LINE\_STRIP} & \texttt{LINE\_STRIP} \\ \hline
+        Jatkuva, sulkeutuva viiva & \texttt{GL\_LINE\_LOOP} & \texttt{LINE\_LOOP} \\ \hline
+        Kolmioita & \texttt{GL\_TRIANGLES} & \texttt{TRIANGLES} \\ \hline
+        Sarja kolmioita & \texttt{GL\_TRIANGLE\_STRIP} & \texttt{TRIANGLE\_STRIP} \\ \hline
+        Kolmioita joilla yhteinen kulma & \texttt{GL\_TRIANGLE\_FAN} & \texttt{TRIANGLE\_FAN} \\ \hline
+        Muoto (Patch) & \texttt{GL\_PATCH} & Ei \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Laskentakirjastot}
+Korkeammalla tasolla WebGL-rajapinnassa on kuitenkin puutteita verratessa OpenGL-rajapintaan. 3D-grafiikan piirtämisessä käytetään huomattavia määriä erilaista matriisilaskentaa. Näitä funktioita ei löydy WebGL-rajapinnan kirjastosta, joten kehittäjän on joko toteutettava ne itse tai käytettävä kolmannen osapuolen kehittämää kirjastoa. Jos kehittäjän tarkoituksiin sopivaa, laadukasta kirjastoa ei ole tiedossa se merkitsee mahdollisesti huomattavaa riskiä kehityksessä.
 
 
 \definecolor{gray}{rgb}{0.4,0.4,0.4}
 \lstset{ %
     numbers=left, %
-    basicstyle=\footnotesize\ttfamily, %
+    basicstyle=\scriptsize\ttfamily, %
     breaklines=true, %
     frame=single, %
     morekeywords={var}, %
     breakatwhitespace=true
 }
-\subsubsection{Helppokäyttöisyys}
+\subsection{WebGL-koodin Helppokäyttöisyys}
 Tässä osiossa helppokäyttöisyyttä katsastetaan vertailemalla WebGL-koodin monimutkaisuutta muihin toteutuksiin. Kirjaston helppokäyttöisyyttä voi myös katsastella esimerkiksi dokumentaation laadun ja koodin struktuurin näkökulmista. Tällainen tarkka katsastus ei kuitenkaan kuulu tämän työn puitteisiin, joten tässä keskitytään ainoastaan lähdekoodin monimutkaisuuden vertailuun.
 
-Verrattavat toteutukset ovat erittäin tiiviisti kirjoitettu, eikä niiden tarkkaa toimintaa ole tarpeellista ymmärtää. Lähdekoodit ovat erinäisten toteutusten piirtosilmukoita, kaikki Hoetzleinin\cite{hoetzlein} tutkimuksesta. Piirtosilmukka yksinkertaisesti tarkoittaa sitä osaa koodista joka piirtää kuvan ruudulle. Ennen piirtosilmukoiden ajoa on jokaisessa toteutuksessa laskettu piirrettävien esineiden uudet sijainnit jollakin metodilla joka on kaikissa toteutuksissa hyvin samanlainen\cite{hoetzlein}. 
+Verrattavat toteutukset ovat erittäin tiiviisti kirjoitettu, joten niiden toiminnallisuus selitetään alustavasti koodin yhteydessä. Lähdekoodit ovat erinäisten toteutusten piirtosilmukoita, kaikki Hoetzleinin\cite{hoetzlein} tutkimuksesta. Piirtosilmukka yksinkertaisesti tarkoittaa sitä osaa koodista joka piirtää kuvan ruudulle. Ennen piirtosilmukoiden ajoa on jokaisessa toteutuksessa laskettu piirrettävien esineiden uudet sijainnit jollakin metodilla joka on kaikissa toteutuksissa hyvin samanlainen\cite{hoetzlein}. 
 
-\autoref{code:hoetzlein_js} kuvastaa Canvas 2D Context -rajapintaa hyödyntävää JavaScript-toteutusta. Tämä on hyvin yksinkertainen piirtosilmukka joka ajetaan kokonaan suorittimessa. Vertaamalla tätä koodeihin \ref{code:hoetzlein_cpp} ja \ref{code:hoetzlein_webgl} nähdään että koodin määrä moninkertaistuu, jota voi pitää selvänä merkkinä monimutkaistumisesta.
+\autoref{code:hoetzlein_js} kuvastaa Canvas 2D Context -rajapintaa hyödyntävää JavaScript-kielen toteutusta. Tämä on hyvin yksinkertainen piirtosilmukka joka ajetaan kokonaan suorittimessa. Vertaamalla tätä koodeihin \ref{code:hoetzlein_cpp} ja \ref{code:hoetzlein_webgl} nähdään että koodin määrä moninkertaistuu, jota voi pitää selvänä merkkinä monimutkaistumisesta. 
 
-\autoref{code:hoetzlein_cpp} ja \autoref{code:hoetzlein_webgl} eivät kuitenkaan eroa toisistaan yhtä paljon: C++-koodin rivimäärä ei eroa WebGL-koodin rivimäärästä yhtä dramaattisesti kuin JavaScript-koodin rivimäärästä. OpenGL- ja WebGL-rajapinnat kuitenkin eroavat toisistaan kattavuuden suhteen, kuten kappaleessa \ref{subsec:kattavuus} eriteltiin. Nämä eroavaisuudet kuitenkin koskettavat pääasiassa sellaisia henkilöitä joille jompi kumpi rajapinta on ennestään tuttu. Lähdekoodin tasolla voidaan olettaa eroja olevan vähemmän, joten kummatkin rajapinnat ovat oletettavasti yhtä helppoja käyttää. 
+Toisin kuin Canvas 2D Context-rajapinnan tapauksessa laskentaa ei suoriteta samassa muistissa. Kaikkien piirrettävien objektien uudet sijainnit on siirrettävä näytönohjaimen muistiin. OpenGL- ja WebGL-rajapintojen monimutkaisemmassa koodissa täytyy ensin sitoa objektien kuvat laskettuihin uusiin koordinaatteihin, tämä tieto on siirrettävä näytönohjaimelle ja lopulta näytönohjainta on pyydettävä piirtämään kuva. 
+
+Canvas 2D Context-rajapinta on helpompi käyttää. Jokaista objektia kohden kerrotaan objektin uusi sijainti sekä kuva joka kyseiseen sijaintiin tulisi piirtää. Tietoa ei tarvitse siirtää muistien välillä, sillä se löytyy valmiiksi samasta välimuistista mistä koodi ajetaan. Näin Canvas 2D Context-rajapinnan koodi pysyy paljon yksinkertaisempana.
+
+\autoref{code:hoetzlein_cpp} ja \autoref{code:hoetzlein_webgl} eivät kuitenkaan eroa toisistaan yhtä paljon kuin koodista \ref{code:hoetzlein_js}: C++-koodin rivimäärä ei eroa WebGL-koodin rivimäärästä yhtä dramaattisesti kuin JavaScript-koodin rivimäärästä. OpenGL- ja WebGL-rajapinnat tosin eroavat toisistaan kattavuuden suhteen, kuten kappaleessa \ref{subsec:piirteet} eriteltiin. Kyseiset eroavaisuudet kuitenkin koskivat pääasiassa sellaisia henkilöitä joille jompi kumpi rajapinta oli ennestään tuttu. Lähdekoodin tasolla voidaan olettaa eroja olevan vähemmän, joten kummatkin rajapinnat ovat oletettavasti yhtä helppoja käyttää. Näin ollen pelinkehittäjän ei luultavasti tarvitse huolehtia itse koodin monimutkaistumisesta OpenGL-rajapintaan verrattuna. 
 
 \lstinputlisting[float, language=Java, caption={2D Context-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_js}]{hoetzlein_loop_js.js}
 \lstinputlisting[float, language=C++, caption={OpenGL-rajapintaa käyttävä, C++-kilellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_cpp}]{hoetzlein_loop_c.cpp}
@@ -64,10 +98,10 @@ Verrattavat toteutukset ovat erittäin tiiviisti kirjoitettu, eikä niiden tarkk
 
 \subsection{Alustariippumattomuus}
 
-Web-sovellusten suurin etu on alustariippumattomuus: sama sovellus toimii teoriassa kaikilla alustoilla jotka tukevat selainta, jolla sovellus toimii. Teoriassa kehittäjän tarvitsee ainoastaan varmistaa pelin toimivan niillä selaimilla joilla on surimmat käyttäjämäärät saadakseen pelilleen mahdollisimman suuren potentiaalisen yleisön.
+Web-sovellusten suurin etu on alustariippumattomuus: saman sovelluksen pitäisi toimia kaikilla alustoilla jotka tukevat selainta, jolla sovellus toimii. Teoriassa kehittäjän tarvitsee ainoastaan varmistaa pelin toimivan niillä selaimilla joilla on surimmat käyttäjämäärät saadakseen pelilleen mahdollisimman suuren potentiaalisen yleisön. Parhaassa tapauksessa ainoastaan pieniä osia koodista tarvitsee muuttaa, jotta koodi saadaan toimimaan eri selaimissa. Natiivit sovellukset taas saattavat pahimmillaan vaatia täysin eri kielet eri alustoja varten, jolloin samasta toteutuksesta voi olla useita ylläpidettäviä kopioita. Tällöin selaimessa toimiva sovellus olisi huomattavasti helpompi ylläpitää.
 
-Käytännössä selainten välillä saattaa kuitenkin olla suuriakin eroja. Varsinkin JavaScriptin kääntönopeudet vaihtelevat huomattavasti käytetyimpien selainten välillä\cite{hoetzlein}. Suurempi ongelma on kuitenkin WebGL:n toteutusten erot: jotkin piirto-ominaisuudet saattavat toimia aivan eri lailla riippuen selaimesta\cite{voutilainen}. Näin ollen kehittäjän ei välttämättä ole helppoa saada peliään toimimaan kaikilla selaimilla: jotkin piirtoratkaisut saattaa olla pakollista muuttaa perustavanlaatuisesti jotta tuote saadaan toimimaan toisella selaimella.
+Käytännössä selainten välillä saattaa kuitenkin olla suuriakin eroja. Varsinkin JavaScriptin kääntönopeudet vaihtelevat huomattavasti käytetyimpien selainten välillä\cite{hoetzlein}. Suurempi ongelma on kuitenkin WebGL-rajapinnan toteutusten erot: jotkin piirto-ominaisuudet saattavat toimia aivan eri lailla riippuen selaimesta\cite{voutilainen}. Näin ollen kehittäjän ei välttämättä ole helppoa saada peliään toimimaan kaikilla selaimilla: jotkin piirtoratkaisut saattaa olla pakollista muuttaa perustavanlaatuisesti jotta tuote saadaan toimimaan toisella selaimella.
 
-Suurin ongelma WebGL:n alustariippumattomuudelle on kuitenkin laitteistotuki. WebGL:n käyttäessä laitteen näytönohjainta ovat mahdolliset selain-laite yhdistelmät paljon moninaisemmat. Näin ollen selainten ja laitteiston yhteensopivuudet eivät ole taattuja, vaan laitteen toimivuus riippuu käytetystä selaimesta\cite{mozillaBlacklist}\cite{webgl_supported}. Kehittäjä ei näin ollen voi olla varma että kaikki selaimen käyttäjät voivat pelata WebGL-pohjaisia pelejä.
+Suurin ongelma WebGL:n alustariippumattomuudelle on kuitenkin laitteistotuki. Koska WebGL-rajapinta toimii laitteen näytönohjaimen kanssa, ovat mahdolliset selain-laite yhdistelmät hyvin moninaiset. Näin ollen selainten ja laitteiston yhteensopivuudet eivät ole taattuja, vaan laitteen toimivuus riippuu käytetystä selaimesta\cite{mozillaBlacklist}\cite{webgl_supported}. Kehittäjä ei näin ollen voi olla varma, että kaikki selaimen käyttäjät voivat pelata WebGL-pohjaisia pelejä.
 
-Toisaalta on pidettävä mielessä että selainvalmistajat pyrkivät tukemaan suurinta määrää käyttäjiä. Varsinkin jos WebGL:stä tulee suosittu teknologia voidaan olettaa että selainvalmistajat varmistavat tuen ainakin kaikkein suosituimmille näytönohjainmalleille. Kehittäjä ei siis saa peliään toimimaan kaikkien potentiaalisten käyttäjien koneilla, mutta ero ei luultavasti ole dramaattinen.
+Toisaalta on pidettävä mielessä, että selainvalmistajat pyrkivät tukemaan suurinta määrää käyttäjiä. Varsinkin jos WebGL:stä tulee suosittu teknologia voidaan olettaa, että selainvalmistajat varmistavat tuen ainakin kaikkein suosituimmille näytönohjainmalleille. Kehittäjä ei siis saa peliään toimimaan kaikkien potentiaalisten käyttäjien koneilla, mutta ero ei luultavasti ole dramaattinen.
