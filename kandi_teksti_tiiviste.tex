@@ -1,5 +1,16 @@
 \begin{fiabstract}
-TODO: tiivistelmä
+\raggedright
+Tässä kandidaatintyössä tarkastellaan HTML5-specifikaation WebGL-rajapintaa pelinkehittäjän näkökulmasta. Työssä tutkitaan kirjallisuuskatsauksen avulla WebGL-rajapinnan erityispiirteitä ja soveltuvuuksia.
+
+Aikaisemmista tutkimuksista havaitaan että pelien graafisen esityksen laadulla on vaikutus intensiivisten pelien pelattavuuteen. Varsinkin ruudun päivitystiheyden huomataan haittaavan pelattavuutta ollessaan matala. 
+
+WebGL on huomattavasti nopeampi kuin Canvas 2D Context-toteutukset ja selvästi hitaampi kuin natiivi OpenGL/C++-toteutus. Mittaustuloksia tutkimalla huomataan eron johtuvan pääosin JavaScript-koodin hitaudesta.
+
+Asynkronista lataamista ja matriisilaskentaa ei ole toteutettu itse kirjastoon. Todetaan että puutteet on joko korjattava itse tai on käytettävä ulkoista kirjastoa. Itse koodi on monimutkaisempaa kuin Canvas 2D Context-koodi, mutta ei eroa suuresti natiivista OpenGL-koodista.
+
+WebGL-sovellusten huomataan myös olevan riippuvaisempia alustoista kuin Canvas 2D Context-sovellukset. Eri selainten välillä on toiminnallisuuseroja. Erilaiset selain-näytönohjain yhdistelmät voivat myös olla kokonaan toimimattomia. Todetaan että WebGL on alustasta riippumattomampi kuin OpenGL-sovellus. Kuitenkin WebGL-kehittäjän kannattaa huomioida että sovellus ei yllä yksinkertaisemman Canvas 2D Context-sovelluksen alustariippumattomuuteen.
+
+WebGL-sovellukset toimivat parhaiten korkeatasoisen natiivin ja yksinkertaisen verkkosovelluksen välimaastossa. Kehittäjän ei suositella pyrkiä natiivin sovelluksen suorituskykyyn eikä myöskään olettaa yksinkertaisemman pelin alustariippumattomuutta.  
 %
 %Tiivistelmätekstiä tähän (\languagename). Huomaa, että tiivistelmä tehdään %vasta kun koko työ on muuten kirjoitettu.
 \end{fiabstract}

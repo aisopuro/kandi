@@ -1,6 +1,5 @@
 \section{Pelinkehittäjän tarpeet}
 \label{sec:tarpeet}
-\hyperlink{index}{Takaisin sisällysluetteloon}
 
 Erityisesti nopeita reaktioita vaativien pelien pelattavuus kärsii huomattavasti liian pienillä ruudun päivitysnopeuksilla. Ero pelaajan pelaamiskyvyssä korkeiden ja matalien piirtotaajuuksien välillä on huomattava: kuvat \ref{fig:claypool_performance} ja \ref{fig:claypool_quality} havainnollistavat Claypoolin tutkimusryhmän\cite{claypool_fps} saamia tuloksia tutkittaessa kuvanlaadun ja piirtotiheyden vaikutusta pelaajiin. 
 
@@ -18,7 +17,7 @@ Erityisesti nopeita reaktioita vaativien pelien pelattavuus kärsii huomattavast
 \begin{figure}[h]
     \begin{subfigure}{0.49\textwidth}
         \includegraphics[width=\textwidth]{claypool_quality_to_fps_512x384}
-        \caption{\label{fig:claypool_quality:fps}Pelaajien antamat arvosanat suhteutettuna päivitystiheyteen. Resoluutio 512x384 kuvapistettä.}
+        \caption{\label{fig:claypool_quality:fps}\begin{raggedright}Pelaajien antamat arvosanat suhteutettuna päivitystiheyteen. Resoluutio on 512x384 kuvapistettä.\end{raggedright}}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \includegraphics[width=\textwidth]{claypool_quality_to_rez_15fps}
@@ -27,7 +26,7 @@ Erityisesti nopeita reaktioita vaativien pelien pelattavuus kärsii huomattavast
     \caption{\label{fig:claypool_quality}Claypoolin tutkimusryhmän\cite{claypool_fps} saamia kyselytuloksia. Kyselyissä pyydettiin koehenkilöitä antamaan pelin visuaaliselle laadulle arvosana asteikolla 0-5.}
 \end{figure}
 
-Kuvan \ref{fig:claypool_performance:fps} mukaan piirtotaajudella on suuri vaikutus pelaajiin jotka pelaavat intensiivistä, nopeaa reagointikykyä vaativaa peliä. Claypoolin tutkimusryhmän löydökset\cite{claypool_fps} osoittavat näin ollen yhden pelinkehittäjän konkreettisen tarpeen. Liian vähäinen piirtotaajuus voi pahimmassa tapauksessa tehdä pelistä pelaamattoman.  
+Kuvan \ref{fig:claypool_performance:fps} mukaan piirtotaajudella on suuri vaikutus pelaajiin jotka pelaavat intensiivistä, nopeaa reagointikykyä vaativaa peliä. Claypoolin tutkimusryhmän löydökset\cite{claypool_fps} osoittavat näin ollen yhden pelinkehittäjän konkreettisen tarpeen. Liian vähäinen piirtotaajuus voi pahimmassa tapauksessa tehdä pelistä pelaamattoman. 30 ruutua/s on kuvien perusteella se piste, jossa päivitystiheyden lisäämisen vaikutukset alkavat loiventua. Sitä alemmissa määrissä pelattavuus alkaa kuitenkin kärsiä nopeasti.  
 
 Kuvien \ref{fig:claypool_performance:fps} ja \ref{fig:claypool_quality:fps} perusteella voidaan lisäksi päätellä että päivitystiheydellä on suuri vaikutus pelaajan kokemuksiin pelistä erityisesti tiheyden ollessa matala. Toisaalla vertaamalla kuvaa \ref{fig:claypool_quality:rez} muihin voimme nähdä että päivitystiheyden noustessa yli 30 ruutuun sekunnissa resoluutiolla on suurempi vaikutus pelaajien mielipiteeseen pelin visuaalisesta laadusta\cite{claypool_fps}. 
 

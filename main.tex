@@ -54,6 +54,7 @@
 \pretolerance=10000     % Ei tavuteta alkuunkaan
 \hyphenpenalty=10000   % rangaistaan tavutuksesta, 10000=ääretön
 \tolerance=0        % siedetään välejä riveillä
+\interfootnotelinepenalty=10000 % alaviitteitä ei saa pilkkoa
 % titlesec-paketti auttaa, jos tämän mukana menee sekaisin
 
 % Tekstiviitteiden ulkoasu.
@@ -116,15 +117,15 @@
 
 % Otsikko nimiölehdelle. Yleensä sama kuin seuraavana oleva \TITLE, 
 % mutta jos nimiölehdellä tarvetta "kaksiosaiselle" kaksiriviselle
-\title{WebGL-rajapinta HTML5-pelinkehittäjän näkökulmasta}
+\title{WebGL-rajapinta pelinkehittäjän näkökulmasta}
 % 2-osainen otsikko:
 %\title{\LaTeX{}-pohja kandidaatintyölle \\[5mm] Pitkiä rivejä kokeilun vuoksi.}
 
 % Otsikko tiivistelmään. Jos lisäksi engl. tiivistelmä, niin viimeisin:
-\TITLE{WebGL-rajapinta HTML5-pelinkehittäjän näkökulmasta}
+\TITLE{WebGL-rajapinta pelinkehittäjän näkökulmasta}
 %\TITLE{\LaTeX{} för kandidatseminariet med jättelång rubrik som fortsätter och
 % fortsätter ännu}
-\ENTITLE{The WebGL API from an HTML5-game developer's perspective}
+\ENTITLE{The WebGL API from a game developer's perspective}
 % 2-osainen otsikko korvataan täällä esim. pisteellä:
 %\TITLE{\LaTeX{}-pohja kandidaatintyölle. Pitkiä rivejä kokeilun vuoksi.}
 
@@ -235,7 +236,7 @@
 % -------------- Tiivistelmä / abstract -------------------------------
 % Lisää abstrakti kandikielellä (ja halutessasi lisäksi englanniksi).
 \input{kandi_teksti_tiiviste}
-\input{kandi_teksti_sammandrag}
+%\input{kandi_teksti_sammandrag}
 % Edelleen sivunumerointiin. Eräs ohje käskee aloittaa sivunumeroiden
 % laskemisen nimiösivulta kuitenkin niin, että sille ei numeroa merkitä
 % (Kauranen, luku 5.2.2). Näin ollen ensimmäisen tiivistelmän sivunumero
@@ -289,6 +290,7 @@
 %  (ellet käytä Makefilea ja "make")
 
 % Viitetyylitiedosto aaltosci_t.bst; muokattu HY:n tktl-tyylistä.
+%\bibliographystyle{aaltosci_t}
 \bibliographystyle{unsrt}
 % Katso myös tämän tiedoston yläosan "preamble" ja siellä \bibpunct.
 

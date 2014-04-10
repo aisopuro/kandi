@@ -1,6 +1,6 @@
 \section{WebGL-rajapinnan ominaisuuksia pelinkehittäjän näkökulmasta}
 \label{sec:materiaali}
-\hyperlink{index}{Takaisin sisällysluetteloon}
+
 \subsection{Suorituskyky}
 Selkein WebGL:n tarjoama etu on suorituskyky. WebGL-rajapinta sallii laskennan suorittamisen näytönohjaimessa suorittimen sijaan, mikä on huomattavasti nopeampaa. Kuvasta \ref{fig:hoetzlein_comparison} nähdään että Canvas 2D Context ja Flash ovat vertailussa selvästi hitaampia. C++-pohjainen yksinkertainen OpenGL-sovellus on yllättäen WebGL:ää hitaampi: natiivi toteutus täytyy optimoida ennen kuin se on tehokkaampi kuin WebGL-toteutus.\cite{hoetzlein} Ero ei suurimmaksi osaksi kuitenkaan johdu WebGL:n ja natiivin OpenGL:n välisistä eroista. Koska WebGL:ää kutsutaan verkkosivun koodista, selaimen on suoritettava JavaScript-koodia jokaista piirtoa varten. JavaScript-koodi on muutamia erikoistapauksia lukuunottamatta paljon hitaampaa kuin C++-koodi\cite{smedberg}. Täten suurin osa WebGL:n piirtämisajasta kuluu JavaScriptin kääntämiseen ja ajamiseen\cite{hoetzlein}.
 
@@ -9,17 +9,17 @@ Pelinkehittäjän kannattaa siis ottaa huomioon, että WebGL on huomattavasti hi
 
 \begin{table}[h]
     \begin{minipage}{\textwidth}
-    \caption{\label{tab:hoetzlein_diff}Hoetzleinin\cite{hoetzlein}\cite{hoetzlein_data} mittaustulokset erilaisista toteutuksista piirtäessä 100000 objektia.}
+    \caption{\label{tab:hoetzlein_diff}Hoetzleinin\cite{hoetzlein}\cite{hoetzlein_data} mittaustulokset erilaisista toteutuksista piirtäessä 100000 objektia, paitsi viimeisessä sarakkeessa.}
     \begin{tabular}{ |l|p{2cm}|p{1.1cm}|p{2.5cm}|p{2cm}| }
         \hline
-        \textbf{Implementaatio} & \textbf{Simulointi (ms)} & \textbf{Piirto (ms)} & \textbf{Kokonaisaika (ms)} & \textbf{30Hz maksimi\footnote{Suurin määrä objekteja joita voitiin piirtää ja myös yltää 30 ruudun/sekunti päivitystiheyteen.}} \\ \hline
-        HTML5 ja JavaScript, Firefox & 9,7 & 417,0 & 426,7 & 7000 \\ \hline
-        HTML5 ja JavaScript, Chrome & 59,3 & 391,0 & 450,3 & 4000 \\ \hline
-        HTML5 ja JavaScript, IE 9 & 39,0 & 443,3 & 482,3 & 6000 \\ \hline
-        WebGL, naiivi, Chrome & 54,0 & 23,0 & 77,0 & 70000 \\ \hline
-        WebGL, optimoitu, Chrome & 54,7 & 4,3 & 59,0 & 80000 \\ \hline
-        OpenGL, naiivi & 3,3 & 137,9 & 141,2 & 20000 \\ \hline
-        OpenGL, optimoitu & 3,3 & 7,5 & 10,8 & 400000 \\ \hline
+        \textbf{Implementaatio} & \textbf{Simulointi (ms)} & \textbf{Piirto (ms)} & \textbf{Kokonaisaika (ms)} & \textbf{30 Hz maksimi\footnote{Suurin määrä objekteja joita voitiin piirtää ja myös yltää 30 ruudun/sekunti päivitystiheyteen.}} \\ \hline
+        Canvas 2D Context, Firefox  & 9,7   & 417,0 & 426,7 & 7000      \\ \hline
+        Canvas 2D Context, Chrome   & 59,3  & 391,0 & 450,3 & 4000      \\ \hline
+        Canvas 2D Context, IE 9     & 39,0  & 443,3 & 482,3 & 6000      \\ \hline
+        WebGL, naiivi, Chrome       & 54,0  & 23,0  & 77,0  & 70000     \\ \hline
+        WebGL, optimoitu, Chrome    & 54,7  & 4,3   & 59,0  & 80000     \\ \hline
+        OpenGL, naiivi              & 3,3   & 137,9 & 141,2 & 20000     \\ \hline
+        OpenGL, optimoitu           & 3,3   & 7,5   & 10,8  & 400000    \\ \hline
     \end{tabular}
     \end{minipage}
 \end{table}
@@ -32,6 +32,8 @@ Pelinkehittäjän kannattaa siis ottaa huomioon, että WebGL on huomattavasti hi
 Pelinkehittäjälle olennaista on huomata, että kuvan \ref{fig:hoetzlein_comparison} "WebGL ja JavaScript"~-osion kummassakin toteutuksessa WebGL-koodin osuus kuluneesta ajasta on paljon pienempi kuin JavaScript-koodin. Kehittäjä saattaa siis päästä paljon parempiin tuloksiin, jos hän keskittyy WebGL-koodin sijasta JavaScript-koodin optimointiin. 
 
 JavaScriptin toimintaa voi nopeuttaa niin sanotulla esikääntämisellä. Esikääntämisessä JavaScript-koodi muunnetaan niin että toiminnallisuus ei muutu, mutta koodin struktuuri on tehokkaampaa. Tunnetuin esikääntäjä lienee Google:n Closure-kääntäjä\cite{googleclosure}. Myös muut parannukset ovat mahdollisia. Hoetzleinin\cite{hoetzlein} toteutuksessa esimerkiksi fysiikan laskenta suoritetaan JavaScript-koodissa. Tällaisen laskennan sirtäminen näytönohjaimeen saattaisi nopeuttaa piirtämistä huomattavasti.
+
+Kuten kappaleessa \ref{sec:tarpeet} ja erityisesti kuvassa \ref{fig:claypool_performance:fps} esitettiin, on 30 ruudun/s päivitystiheys jonkinlainen minimi peleissä. Taulukon \ref{tab:hoetzlein_diff} "30 Hz maksimi"-sarakkeesta voidaan nähdä että WebGL-koodilla toteutettu sovellus pystyy piirtämään jopa yli kymmenen kertaa niin paljon esineitä kuin Canvas 2D Context-toteutukset jos pyritään 30 ruudun/s päivitystiheyteen.   
 
 \subsection{WebGL-kirjaston piirteitä}
 \label{subsec:piirteet}
@@ -86,17 +88,23 @@ Verrattavat toteutukset ovat erittäin tiiviisti kirjoitettu, joten niiden toimi
 
 \autoref{code:hoetzlein_js} kuvastaa Canvas 2D Context -rajapintaa hyödyntävää JavaScript-kielen toteutusta. Tämä on hyvin yksinkertainen piirtosilmukka joka ajetaan kokonaan suorittimessa. Vertaamalla tätä koodeihin \ref{code:hoetzlein_cpp} ja \ref{code:hoetzlein_webgl} nähdään että koodin määrä moninkertaistuu, jota voi pitää selvänä merkkinä monimutkaistumisesta. 
 
+\lstinputlisting[float=h, language=Java, caption={2D Context-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_js}]{hoetzlein_loop_js.js}
+
+\lstinputlisting[float=h, language=C++, caption={OpenGL-rajapintaa käyttävä, C++-kielellä toteutettu optimoitu\protect\footnotemark piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_cpp}]{hoetzlein_loop_c.cpp}
+\footnotetext{Sen sijaan että piirtokutsu lähetettäisiin jokaiselle objektille erikseen, Hoetzlein siirtää kaikki uudet sijainnit yhdellä kertaa näytönohjaimen muistiin. Näin muistiväylän käyttö on paljon tehokkaampaa ja nopeampaa.\cite{hoetzlein}}
+
+\lstinputlisting[float=h, language={Java}, caption={WebGL-rajapintaa käyttävä, JavaScript-kielellä toteutettu optimoitu\protect\footnotemark piirtosilmukka\cite{hoetzlein_webgl_code}}, label={code:hoetzlein_webgl}]{hoetzlein_loop_webgl_js.js}
+\footnotetext{Ei-optimoidussa WebGL-koodissa Hoetzlein joutuu eksplisiittisesti kertomaan jokaisen objektin kulmat. Tässä koodissa Hoetzlein käyttää WebGL point sprite-objekteja.\cite{hoetzlein} Tällöin näytönohjaimelle ei tarvitse siirtää yhtä monta päivitettyä pistetietoa.}
+
 Toisin kuin Canvas 2D Context-rajapinnan tapauksessa laskentaa ei suoriteta samassa muistissa. Kaikkien piirrettävien objektien uudet sijainnit on siirrettävä näytönohjaimen muistiin. OpenGL- ja WebGL-rajapintojen monimutkaisemmassa koodissa täytyy ensin sitoa objektien kuvat laskettuihin uusiin koordinaatteihin, tämä tieto on siirrettävä näytönohjaimelle ja lopulta näytönohjainta on pyydettävä piirtämään kuva. 
 
 Canvas 2D Context-rajapinta on helpompi käyttää. Jokaista objektia kohden kerrotaan objektin uusi sijainti sekä kuva joka kyseiseen sijaintiin tulisi piirtää. Tietoa ei tarvitse siirtää muistien välillä, sillä se löytyy valmiiksi samasta välimuistista mistä koodi ajetaan. Näin Canvas 2D Context-rajapinnan koodi pysyy paljon yksinkertaisempana.
 
 \autoref{code:hoetzlein_cpp} ja \autoref{code:hoetzlein_webgl} eivät kuitenkaan eroa toisistaan yhtä paljon kuin koodista \ref{code:hoetzlein_js}: C++-koodin rivimäärä ei eroa WebGL-koodin rivimäärästä yhtä dramaattisesti kuin JavaScript-koodin rivimäärästä. OpenGL- ja WebGL-rajapinnat tosin eroavat toisistaan kattavuuden suhteen, kuten kappaleessa \ref{subsec:piirteet} eriteltiin. Kyseiset eroavaisuudet kuitenkin koskivat pääasiassa sellaisia henkilöitä joille jompi kumpi rajapinta oli ennestään tuttu. Lähdekoodin tasolla voidaan olettaa eroja olevan vähemmän, joten kummatkin rajapinnat ovat oletettavasti yhtä helppoja käyttää. Näin ollen pelinkehittäjän ei luultavasti tarvitse huolehtia itse koodin monimutkaistumisesta OpenGL-rajapintaan verrattuna. 
 
-\lstinputlisting[float, language=Java, caption={2D Context-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_js}]{hoetzlein_loop_js.js}
-\lstinputlisting[float, language=C++, caption={OpenGL-rajapintaa käyttävä, C++-kilellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_cpp}]{hoetzlein_loop_c.cpp}
-\lstinputlisting[float, language={Java}, caption={WebGL-rajapintaa käyttävä, JavaScript-kielellä toteutettu piirtosilmukka\cite{hoetzlein}}, label={code:hoetzlein_webgl}]{hoetzlein_loop_webgl_js.js}
 
 \subsection{Alustariippumattomuus}
+\label{sec_platforms}
 
 Web-sovellusten suurin etu on alustariippumattomuus: saman sovelluksen pitäisi toimia kaikilla alustoilla jotka tukevat selainta, jolla sovellus toimii. Teoriassa kehittäjän tarvitsee ainoastaan varmistaa pelin toimivan niillä selaimilla joilla on surimmat käyttäjämäärät saadakseen pelilleen mahdollisimman suuren potentiaalisen yleisön. Parhaassa tapauksessa ainoastaan pieniä osia koodista tarvitsee muuttaa, jotta koodi saadaan toimimaan eri selaimissa. Natiivit sovellukset taas saattavat pahimmillaan vaatia täysin eri kielet eri alustoja varten, jolloin samasta toteutuksesta voi olla useita ylläpidettäviä kopioita. Tällöin selaimessa toimiva sovellus olisi huomattavasti helpompi ylläpitää.
 
