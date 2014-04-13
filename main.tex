@@ -12,7 +12,7 @@
 %\usepackage[T1]{fontenc}      % korjaa ääkkösten tavutusta, bittikarttana
 \usepackage{ae,aecompl}       % ed. lis. vektorigrafiikkana bittikartan sijasta
 % Kieli- ja tavutuspaketit:
-\usepackage[english,swedish,finnish]{babel}
+\usepackage[finnish,english,swedish]{babel}
 % Kurssin omat asetukset aaltosci_t.sty:
 \usepackage{aaltosci_t}
 % Jos kirjoitat muulla kuin suomen kielellä valitse:
@@ -147,9 +147,9 @@
 
 % Vuosi ja päivämäärä, jolloin työ on jätetty tarkistettavaksi.
 \YEAR{2014}
-\DATE{14. helmikuuta 2014}
+\DATE{13. huhtikuuta 2014}
 %\DATE{31. helmikuuta 2011}
-%\DATE{Den 31 februari 2011}
+%\DATE{Den 13 april 2014}
 \ENDATE{4. huhtikuuta 2014}
 
 % Kurssin vastuuopettaja ja työsi ohjaaja(t)
@@ -225,7 +225,7 @@
 % VANHA //  sivunumerolla 1. %   Toisin sanoen, viimeisen lähdeluettelosivun 
 % VANHA //  sivunumero EI ole sivujen määrä vaan se pitää laskea tähän käsin
 
-\PAGES{TODO: Kirjoita tähän lopuksi oikea määrä, tässä esimerkissä 23}
+\PAGES{27}
 %\PAGES{23}  % kaikki sivut laskettuna nimiölehdestä lähdeluettelon tai 
              % mahdollisten liitteiden loppuun. Tässä 23 sivua
 
@@ -301,10 +301,13 @@
 % Lisätään sisällysluetteloon
 \addcontentsline{toc}{section}{\refname}  % article
 %\addcontentsline{toc}{chapter}{\bibname}  % book, report
-
+\begingroup
+\raggedright
 % Määritä kaikki bib-tiedostot
-\bibliography{kandi_lahteet}
+%\bibliography{kandi_lahteet}
+\bibliography{kandi_lahteet_hack}
 %\bibliography{thesis_sources,ietf_sources}
+\endgroup
 
 \label{pages:refs}
 \clearpage         % erotetaan mahd. liitteet alkamaan uudelta sivulta
@@ -318,10 +321,11 @@
 % haastattelurunko, kyselypohja, ylimääräisiä kuvia, lyhyitä 
 % ohjelmakoodeja tai datatiedostoja.
 
-% \appendix
-% \input{luku_liitteet}
+\appendix
+\section{Sammandrag av kandidatarbetet på svenska}
+\input{kandi_sammandrag}
 
-% \label{pages:appendices}
+\label{pages:appendices}
 
 % ---------------------------------------------------------------------
 
